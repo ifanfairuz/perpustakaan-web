@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Stock;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +17,7 @@ class BookSeeder extends Seeder
     {
         $filename = $code.'_'.time().'.'.pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION);
         copy($url, storage_path("app/public/books/$filename"));
-        return asset("/storage/books/$filename");
+        return "/storage/books/$filename";
     }
 
     /**
@@ -28,6 +29,18 @@ class BookSeeder extends Seeder
 
         return Category::create([
             'name' => $name
+        ]);
+    }
+
+    /**
+     * store category
+     */
+    protected function store_stock($bookid)
+    {
+        return Stock::create([
+            'total' => rand(10, 100),
+            'type' => 'in',
+            'book_id' => $bookid
         ]);
     }
 
@@ -52,9 +65,11 @@ class BookSeeder extends Seeder
             ]);
             if ($book) {
                 $cover = $this->store_cover($data['thumbnailUrl'], $book->code);
+                $stock = $this->store_stock($book->id);
+                $book->increment('stock', $stock->total);
                 $book->thumbnail = $cover;
-                $updated = $book->save();
-                if ($updated) DB::commit();
+                $book->save();
+                DB::commit();
             }
         } catch (\Exception $e) {
             DB::rollBack();
