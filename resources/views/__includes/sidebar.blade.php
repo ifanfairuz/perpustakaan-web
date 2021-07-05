@@ -3,9 +3,9 @@
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
     <div class="sidebar-brand-icon">
-      <img class="sidebar-logo" src="privos.jpg" alt="logo">
+      <img class="sidebar-logo" src="/img/privos.jpg" alt="logo">
     </div>
-    <div class="sidebar-brand-text mx-3">{{ site('name') }}</div>
+    <div class="sidebar-brand-text mx-3">{{ sidebar_title() }}</div>
   </a>
 
   <!-- Divider -->

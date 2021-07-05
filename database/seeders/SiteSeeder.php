@@ -14,8 +14,8 @@ class SiteSeeder extends Seeder
     public function run()
     {
     	\App\Models\Site::create([
-    		'name' => 'Library',
-    		'address' => 'Indonesia'
+    		'name' => 'Perpustakaan - PRIVOS',
+    		'address' => 'JL. Pecalukan, 67157, Ledug, Ledug, Prigen, Pasuruan, Pasuruan, Jawa Timur 67157'
     	]);
     }
 }

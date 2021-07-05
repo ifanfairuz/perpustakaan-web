@@ -7,6 +7,7 @@ use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\Schema;
 
 use Cache;
+use Illuminate\Support\Facades\Cache as FacadesCache;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Builder::defaultStringLength(191);
         if (Schema::hasTable('site')) {
-            Cache::forever('site', \App\Models\Site::first());
+            FacadesCache::forever('site', \App\Models\Site::first());
         }
     }
 }

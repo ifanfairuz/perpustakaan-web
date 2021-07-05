@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="col-lg-6 d-none d-lg-block bg-login-image" style="{{ 'background-image: url('. asset('privos.jpg') .')' }}"></div>
+<div class="col-lg-6 d-none d-lg-block bg-login-image" style="{{ 'background-image: url('. asset('/img/privos-bg.jpg') .')' }}"></div>
 <div class="col-lg-6">
 <div class="p-5">
   <div class="text-center">
