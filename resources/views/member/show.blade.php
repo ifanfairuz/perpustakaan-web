@@ -33,7 +33,7 @@
 								</tr>
 								<tr>
 									<th>Tgl Lahir</th>
-									<td>{{ localTanggal($member->birthday) }}</td>
+									<td>{{ localDate($member->birthday) }}</td>
 								</tr>
 								<tr>
 									<th>No Telp</th>
