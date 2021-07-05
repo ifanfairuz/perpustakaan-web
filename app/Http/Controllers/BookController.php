@@ -160,10 +160,12 @@ class BookController extends Controller
     // Get Book
     public function get(Request $request)
     {
-        $code = $request->code;
-        $books = Book::where('code', 'like', '%'.$code.'%')->latest()->get(
-            ['id', 'code as text', 'name', 'stock']
-        );
+        $code = $request->code ?? $request->name;
+        $books = Book::select('id', 'name', 'stock')
+            ->selectRaw("CONCAT('(', code, ') ', name) as text")
+            ->where('code', 'like', '%'.$code.'%')
+            ->orWhere('name', 'like', '%'.$code.'%')
+            ->latest()->get();
         return $books;
     }
 
