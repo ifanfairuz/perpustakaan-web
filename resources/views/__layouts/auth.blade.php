@@ -23,7 +23,7 @@
 
 <body class="bg-gray-100">
 
-  <div class="container">
+  <div class="container d-flex flex-column justify-content-center" style="min-height: 100vh">
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -42,6 +42,16 @@
       </div>
 
     </div>
+
+    <!-- Footer -->
+    <footer class="sticky-footer">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright &copy; {{ site('name') }} {{ date('Y') }}</span>
+        </div>
+      </div>
+    </footer>
+    <!-- End of Footer -->
 
   </div>
 
