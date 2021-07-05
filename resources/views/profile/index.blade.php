@@ -1,6 +1,6 @@
 @extends('__layouts.app')
 
-@section('title', 'Profile')
+@section('title', 'Profil')
 
 @section('content')
 
@@ -8,7 +8,7 @@
 	<div class="col-md-6 mx-auto">
 		<div class="card shadow mb-4">
 			<div class="card-header">
-				<h6 class="font-weight-bold text-primary m-0">Profile</h6>
+				<h6 class="font-weight-bold text-primary m-0">Profil</h6>
 			</div>
 			<div class="card-body">
 				@if(session('success'))
@@ -21,8 +21,8 @@
 					@csrf
 					@method('put')
 					<div class="form-group">
-						<label>Name</label>
-						<input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name" value="{{ Auth::user()->name }}" required>
+						<label>Nama</label>
+						<input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nama" value="{{ Auth::user()->name }}" required>
 
 						@error('name')
 							<span class="invalid-feedback">{{ $message }}</span>
@@ -45,8 +45,8 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label>Confirm Password</label>
-						<input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password">
+						<label>Konfirmasi Password</label>
+						<input type="password" class="form-control" name="password_confirmation" placeholder="Konfirmasi Password">
 					</div>
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">Save</button>

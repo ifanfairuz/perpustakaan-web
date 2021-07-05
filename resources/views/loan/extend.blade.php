@@ -16,7 +16,7 @@
 	</div>
 	<div class="modal-footer">
 		<button class="btn btn-primary" type="submit">Extend</button>
-		<button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		<button class="btn btn-danger" data-dismiss="modal">Batal</button>
 	</div>
 </form>
 </div>

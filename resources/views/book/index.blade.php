@@ -1,14 +1,14 @@
 @extends('__layouts.app')
 
-@section('title', 'Book')
+@section('title', 'Buku')
 
 @section('content')
 
 	<div class="card shadow mb-4">
 		<div class="card-header d-flex align-items-center justify-content-between">
-			<h6 class="font-weight-bold text-primary m-0">Data Book</h6>
+			<h6 class="font-weight-bold text-primary m-0">Data Buku</h6>
 			<div>
-				<a href="{{ route('book.create') }}" class="btn btn-primary btn-sm">New Book</a>
+				<a href="{{ route('book.create') }}" class="btn btn-primary btn-sm">Tambah Buku</a>
 			</div>
 		</div>
 		<div class="card-body">
@@ -25,12 +25,12 @@
 					<thead>
 						<tr>
 							<th>No</th>
-							<th>Code</th>
-							<th>Name</th>
-							<th>Writer</th>
-							<th>Year</th>
-							<th>Stock</th>
-							<th>Action</th>
+							<th>Kode</th>
+							<th>Nama</th>
+							<th>Penulis</th>
+							<th>Tahun</th>
+							<th>Stok</th>
+							<th>#</th>
 						</tr>
 					</thead>
 				</table>
@@ -50,19 +50,19 @@
 			@csrf
 			@method('put')
 			<div class="form-group">
-				<label>Code</label>
-				<input type="text" class="form-control" name="code" placeholder="Code" autofocus>
+				<label>Kode</label>
+				<input type="text" class="form-control" name="code" placeholder="Kode" autofocus>
 
 				<span class="invalid-feedback"></span>
 			</div>
 			<div class="form-group">
-				<label>Name</label>
-				<input type="text" class="form-control" name="name" placeholder="Name" required>
+				<label>Nama</label>
+				<input type="text" class="form-control" name="name" placeholder="Nama" required>
 
 				<span class="invalid-feedback"></span>
 			</div>
 			<div class="form-group">
-				<label>Category</label>
+				<label>Kategori</label>
 				<select name="category_id" class="form-control custom-select" required></select>
 
 				@error('category_id')
@@ -70,21 +70,21 @@
 				@enderror
 			</div>
 			<div class="form-group">
-				<label>Writer</label>
-				<input type="text" class="form-control" name="writer" placeholder="Writer" required>
+				<label>Penulis</label>
+				<input type="text" class="form-control" name="writer" placeholder="Penulis" required>
 				
 				<span class="invalid-feedback"></span>
 			</div>
 			<div class="form-group">
-				<label>Year</label>
-				<input type="number" maxlength="4" class="form-control" name="year" placeholder="Year" required>
+				<label>Tahun</label>
+				<input type="number" maxlength="4" class="form-control" name="year" placeholder="Tahun" required>
 				
 				<span class="invalid-feedback"></span>
 			</div>
 		</div>
 		<div class="modal-footer">
 			<button class="btn btn-primary" type="submit">Update</button>
-			<button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			<button class="btn btn-danger" data-dismiss="modal">Batal</button>
 		</div>
 	</form>
 	</div>

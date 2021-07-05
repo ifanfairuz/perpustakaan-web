@@ -85,7 +85,7 @@ $(function () {
 	})
 
 	$('[name=code').select2({
-		placeholder: 'Code',
+		placeholder: 'Kode',
 		ajax: {
 			url: getBookUrl,
 			type: 'post',

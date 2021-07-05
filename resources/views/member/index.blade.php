@@ -1,14 +1,14 @@
 @extends('__layouts.app')
 
-@section('title', 'Member')
+@section('title', 'Anggota')
 
 @section('content')
 
 	<div class="card shadow mb-4">
 		<div class="card-header d-flex align-items-center justify-content-between">
-			<h6 class="font-weight-bold text-primary m-0">Data Member</h6>
+			<h6 class="font-weight-bold text-primary m-0">Data Anggota</h6>
 			<div>
-				<a href="{{ route('member.create') }}" class="btn btn-primary btn-sm">New Member</a>
+				<a href="{{ route('member.create') }}" class="btn btn-primary btn-sm">Tambah Anggota</a>
 			</div>
 		</div>
 		<div class="card-body">
@@ -25,9 +25,9 @@
 					<thead>
 						<tr>
 							<th>No</th>
-							<th>Name</th>
-							<th>Gender</th>
-							<th>Action</th>
+							<th>Nama</th>
+							<th>Jenis Kelamin</th>
+							<th>#</th>
 						</tr>
 					</thead>
 				</table>
@@ -49,23 +49,23 @@
 			<div class="form-row">
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label>Name</label>
-						<input type="text" class="form-control" name="name" placeholder="Name" autofocus required>
+						<label>Nama</label>
+						<input type="text" class="form-control" name="name" placeholder="Nama" autofocus required>
 
 						<span class="invalid-feedback"></span>
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label>Phone</label>
-						<input type="number" class="form-control" name="phone" placeholder="Phone" required>
+						<label>No Telp</label>
+						<input type="number" class="form-control" name="phone" placeholder="No Telp" required>
 
 						<span class="invalid-feedback"></span>
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label>Gender</label>
+						<label>Jenis Kelamin</label>
 						<select name="gender" class="form-control custom-select" required>
 							<option value="male">Male</option>
 							<option value="female">Female</option>
@@ -76,7 +76,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label>Birthday</label>
+						<label>Tgl Lahir</label>
 						<input type="date" class="form-control" name="birthday" placeholder="birthday" required>
 
 						<span class="invalid-feedback"></span>
@@ -84,16 +84,16 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label>Address</label>
-				<textarea class="form-control" name="address" placeholder="Address" required></textarea>
+				<label>Alamat</label>
+				<textarea class="form-control" name="address" placeholder="Alamat" required></textarea>
 
 				<span class="invalid-feedback"></span>
 			</div>
 			<div class="form-group">
-				<label>Photo</label>
+				<label>Foto</label>
 				<div class="custom-file">
 					<label class="custom-file-label" id="photo">Upload</label>
-					<input type="file" class="custom-file-input" name="file" placeholder="Photo">
+					<input type="file" class="custom-file-input" name="file" placeholder="Foto">
 					
 					<span class="invalid-feedback"></span>
 				</div>
@@ -102,7 +102,7 @@
 		</div>
 		<div class="modal-footer">
 			<button class="btn btn-primary" type="submit">Update</button>
-			<button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			<button class="btn btn-danger" data-dismiss="modal">Batal</button>
 		</div>
 	</form>
 	</div>

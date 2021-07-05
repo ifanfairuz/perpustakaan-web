@@ -1,6 +1,6 @@
 @extends('__layouts.app')
 
-@section('title', 'Category')
+@section('title', 'Kategori')
 
 @section('content')
 
@@ -9,19 +9,19 @@
 			<div class="card shadow mb-4">
 			<form action="" id="create">
 				<div class="card-header">
-					<h6 class="card-title my-0 font-weight-bold text-primary">Add Category</h6>
+					<h6 class="card-title my-0 font-weight-bold text-primary">Tambah Kategori</h6>
 				</div>
 				<div class="card-body">
 					@csrf
 					<div class="form-group">
-						<label>Name</label>
-						<input type="text" name="name" class="form-control" placeholder="Name" required></input>
+						<label>Nama</label>
+						<input type="text" name="name" class="form-control" placeholder="Nama" required></input>
 
 						<span class="invalid-feedback"></span>
 					</div>
 				</div>
 				<div class="card-footer">
-					<button class="btn btn-primary" type="primary">Add</button>
+					<button class="btn btn-primary" type="primary">Tambah</button>
 				</div>
 			</div>
 			</form>
@@ -29,7 +29,7 @@
 		<div class="col-md-8">
 			<div class="card shadow">
 				<div class="card-header">
-					<h6 class="card-title my-0 font-weight-bold text-primary">Data Categories</h6>
+					<h6 class="card-title my-0 font-weight-bold text-primary">Data Kategori</h6>
 				</div>
 				<div class="card-body">
 					<div id="alert"></div>
@@ -38,8 +38,8 @@
 							<thead>
 								<tr>
 									<th>No</th>
-									<th>Name</th>
-									<th>Action</th>
+									<th>Nama</th>
+									<th>#</th>
 								</tr>
 							</thead>
 						</table>
@@ -61,15 +61,15 @@
 			@csrf
 			@method('put')
 			<div class="form-group">
-				<label>Name</label>
-				<input type="text" class="form-control" name="name" placeholder="Name" autofocus>
+				<label>Nama</label>
+				<input type="text" class="form-control" name="name" placeholder="Nama" autofocus>
 
 				<span class="invalid-feedback"></span>
 			</div>
 		</div>
 		<div class="modal-footer">
 			<button class="btn btn-primary" type="submit">Update</button>
-			<button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			<button class="btn btn-danger" data-dismiss="modal">Batal</button>
 		</div>
 	</form>
 	</div>

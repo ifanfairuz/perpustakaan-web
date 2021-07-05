@@ -17,30 +17,30 @@
 		<div class="col-md-8">
 			<div class="card shadow mb-4">
 				<div class="card-header">
-					<h6 class="font-weight-bold text-primary m-0">Data Member</h6>
+					<h6 class="font-weight-bold text-primary m-0">Data Anggota</h6>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-bordered" width="100%">
 							<tbody>
 								<tr>
-									<th>Name</th>
+									<th>Nama</th>
 									<td>{{ $member->name }}</td>
 								</tr>
 								<tr>
-									<th>Gender</th>
+									<th>Jenis Kelamin</th>
 									<td>{{ $member->gender }}</td>
 								</tr>
 								<tr>
-									<th>Birthday</th>
-									<td>{{ localDate($member->birthday) }}</td>
+									<th>Tgl Lahir</th>
+									<td>{{ localTanggal($member->birthday) }}</td>
 								</tr>
 								<tr>
-									<th>Phone</th>
+									<th>No Telp</th>
 									<td>{{ $member->phone }}</td>
 								</tr>
 								<tr>
-									<th>Address</th>
+									<th>Alamat</th>
 									<td>{{ $member->address }}</td>
 								</tr>
 							</tbody>

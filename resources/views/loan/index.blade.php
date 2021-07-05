@@ -1,37 +1,37 @@
 @extends('__layouts.app')
 
-@section('title', 'Loan')
+@section('title', 'Peminjaman')
 
 @section('content')
 
 	<div class="card shadow mb-4">
 		<div class="card-header d-flex align-items-center justify-content-between">
-			<h6 class="font-weight-bold text-primary m-0">Data Loan</h6>
+			<h6 class="font-weight-bold text-primary m-0">Data Peminjaman</h6>
 			<div>
 				<button class="btn btn-sm btn-success" data-toggle="collapse" data-target="#filter">Filter</button>
-				<a href="{{ route('loan.create') }}" class="btn btn-primary btn-sm">Make Loan</a>
+				<a href="{{ route('loan.create') }}" class="btn btn-primary btn-sm">Tambah Peminjaman</a>
 			</div>
 		</div>
 		<div class="card-body border-bottom collapse" id="filter">
 			<form class="form-row">
 				<div class="col-sm-4">
 					<div class="form-group">
-						<label>Member</label>
-						<input type="text" class="form-control" data-filter="member" placeholder="Member">
+						<label>Anggota</label>
+						<input type="text" class="form-control" data-filter="member" placeholder="Anggota">
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
-						<label>Return</label>
-						<input type="date" class="form-control" data-filter="return" placeholder="Return">
+						<label>Kembali</label>
+						<input type="date" class="form-control" data-filter="return" placeholder="Kembali">
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
 						<label>Status</label>
 						<select data-filter="status" class="form-control custom-select">
-							<option value="1">Active</option>
-							<option value="0">Returned</option>
+							<option value="1">Aktif</option>
+							<option value="0">Kembali</option>
 						</select>
 					</div>
 				</div>
@@ -51,12 +51,12 @@
 					<thead>
 						<tr>
 							<th>No</th>
-							<th>Book</th>
-							<th>Member</th>
-							<th>Return</th>
-							<th>Late</th>
+							<th>Buku</th>
+							<th>Anggota</th>
+							<th>Kembali</th>
+							<th>Telat</th>
 							<th>Status</th>
-							<th>Action</th>
+							<th>#</th>
 						</tr>
 					</thead>
 				</table>

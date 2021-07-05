@@ -1,6 +1,6 @@
 @extends('__layouts.app')
 
-@section('title', 'Remove Stock')
+@section('title', 'Hapus Stok')
 
 @section('content')
 
@@ -9,14 +9,14 @@
 			<div class="card shadow mb-4">
 			<form action="" id="create">
 				<div class="card-header">
-					<h6 class="card-title my-0 font-weight-bold text-primary">Remove Stock</h6>
+					<h6 class="card-title my-0 font-weight-bold text-primary">Hapus Stok</h6>
 				</div>
 				<div class="card-body">
 					@csrf
 					<input type="hidden" name="type" value="out">
 					<div class="form-group">
-						<label>Code</label>
-						<select name="code" class="form-control custom-select" placeholder="Code" required></select>
+						<label>Kode</label>
+						<select name="code" class="form-control custom-select" placeholder="Kode" required></select>
 					</div>
 					<div class="form-group">
 						<label>Total</label>
@@ -25,7 +25,7 @@
 					</div>
 				</div>
 				<div class="card-footer">
-					<button class="btn btn-primary" type="primary">Remove</button>
+					<button class="btn btn-primary" type="primary">Hapus</button>
 				</div>
 			</div>
 			</form>
@@ -42,10 +42,10 @@
 							<thead>
 								<tr>
 									<th>No</th>
-									<th>Code</th>
+									<th>Kode</th>
 									<th>Total</th>
-									<th>Date</th>
-									<th>Action</th>
+									<th>Tanggal</th>
+									<th>#</th>
 								</tr>
 							</thead>
 						</table>
@@ -88,7 +88,7 @@
 			let max = $('.max')
 
 			total.attr('max', stock)
-			max.html(`Stock ${stock}`)
+			max.html(`Stok ${stock}`)
 		})
 	</script>
 

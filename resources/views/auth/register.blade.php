@@ -12,7 +12,7 @@
       <form class="user" action="{{ route('register') }}" method="post">
         @csrf
         <div class="form-group">
-            <input type="text" class="form-control form-control-user @error('name') is-invalid @enderror" placeholder="Name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+            <input type="text" class="form-control form-control-user @error('name') is-invalid @enderror" placeholder="Nama" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
             @error('name')
                 <span class="invalid-feedback" role="alert">
@@ -21,7 +21,7 @@
             @enderror
         </div>
         <div class="form-group">
-            <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="email">
+            <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" placeholder="Email Alamat" name="email" value="{{ old('email') }}" required autocomplete="email">
 
             @error('email')
                 <span class="invalid-feedback" role="alert">
