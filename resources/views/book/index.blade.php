@@ -41,7 +41,7 @@
 	<div class="modal" id="edit">
 	<div class="modal-dialog">
 	<div class="modal-content">
-	<form>
+	<form enctype="multipart/form-data">
 		<div class="modal-header">
 			<h5 class="modal-title">Edit Data</h5>
 			<button class="close" data-dismiss="modal">&times;</button>
@@ -80,6 +80,22 @@
 				<input type="number" maxlength="4" class="form-control" name="year" placeholder="Tahun" required>
 				
 				<span class="invalid-feedback"></span>
+			</div>
+			<div class="form-group">
+				<label>Deskripsi</label>
+				<textarea class="form-control" name="description" placeholder="Deskripsi"></textarea>
+
+				<span class="invalid-feedback"></span>
+			</div>
+			<div class="form-group">
+				<label>Sampul</label>
+				<div class="custom-file">
+					<label class="custom-file-label">Unggah</label>
+					<input type="file" class="custom-file-input" name="cover" placeholder="Sampul" required>
+					
+					<span class="invalid-feedback"></span>
+				</div>
+
 			</div>
 		</div>
 		<div class="modal-footer">

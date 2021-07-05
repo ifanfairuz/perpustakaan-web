@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 use Yajra\Datatables\Datatables;
 
 class BookController extends Controller
 {
+    protected $books_path = 'public/books/';
+    protected $books_uri = '/storage/books/';
+
     /**
      * Display a listing of the resource.
      *
@@ -34,6 +38,21 @@ class BookController extends Controller
     }
 
     /**
+     * Delete thumbnail
+     * 
+     * @param string $name
+     * @return bool
+     * @protected
+     */
+    protected function delete_thumnail(string $name)
+    {
+        if (Storage::exists($this->books_path.$name)) {
+            return Storage::delete($this->books_path.$name);
+        }
+        return false;
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -42,10 +61,12 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => 'string|max:6|unique:books|nullable',
+            'code' => 'string|max:15|unique:books|nullable',
             'name' => 'required|string|max:255|unique:books',
             'writer' => 'required|string|max:255',
             'year' => 'required|integer|min:1800|max:'.(date('Y')+1),
+            'description' => 'nullable|string',
+            'cover' => 'nullable|image',
             'category_id' => 'required|exists:categories,id'
         ]);
 
@@ -56,6 +77,17 @@ class BookController extends Controller
                 'code' => $code
             ]);
         }
+
+        $cover = $request->cover;
+        $coverName = $request->code;
+        $coverName = $coverName.'_'.time().'.'.$cover->getClientOriginalExtension();
+        $path = $this->books_uri.$coverName;
+        
+        $request->cover->storeAs($this->books_path, $coverName);
+        
+        $request->merge([
+            'thumbnail' => asset($path)
+        ]);
 
         Book::create($request->all());
 
@@ -72,10 +104,12 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $request->validate([
-            'code' => 'string|max:6|nullable|unique:books,code,'.$book->id,
+            'code' => 'string|max:15|nullable|unique:books,code,'.$book->id,
             'name' => 'required|string|max:255|unique:books,name,'.$book->id,
             'writer' => 'required|string|max:255',
             'year' => 'required|integer|min:1800|max:'.(date('Y')+1),
+            'description' => 'nullable|string',
+            'cover' => 'nullable|image',
             'category_id' => 'required|exists:categories,id'
         ]);
 
@@ -87,7 +121,25 @@ class BookController extends Controller
             ]);
         }
 
+        $delete_old = false;
+        if ($request->hasFile('cover')) {
+            $old_cover = parse_url($book->thumbnail, PHP_URL_PATH);
+            $cover = $request->cover;
+            $coverName = $request->code;
+            $coverName = $coverName.'_'.time().'.'.$cover->getClientOriginalExtension();
+            $path = $this->books_uri.$coverName;
+            $delete_old = $old_cover != $path;
+
+            $request->cover->storeAs($this->books_path, $coverName);
+
+            $request->merge([
+                'thumbnail' => asset($path)
+            ]);
+        }
+
         $book->update($request->all());
+        
+        if ($delete_old) $this->delete_thumnail(pathinfo(@$old_cover, PATHINFO_BASENAME));
 
         return response()->json(['msg' => 'Success Update Book']);
     }

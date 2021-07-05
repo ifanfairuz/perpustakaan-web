@@ -69,7 +69,7 @@
 					<div class="form-group">
 						<label>Foto</label>
 						<div class="custom-file">
-							<label class="custom-file-label">Upload</label>
+							<label class="custom-file-label">Unggah</label>
 							<input type="file" class="custom-file-input @error('file') is-invalid @enderror" name="file" placeholder="Foto" value="{{ old('file') }}" required>
 							
 							@error('file')

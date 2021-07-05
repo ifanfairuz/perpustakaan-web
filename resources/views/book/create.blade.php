@@ -11,12 +11,12 @@
 				<h6 class="font-weight-bold text-primary m-0">Tambah Buku</h6>
 			</div>
 			<div class="card-body">
-				<form action="{{ route('book.store') }}" method="post">
+				<form action="{{ route('book.store') }}" method="post" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
 						<label>Kode</label>
 						<input type="text" class="form-control @error('code') is-invalid @enderror" name="code" placeholder="Kode" value="{{ old('code') }}" autofocus>
-						<small class="form-text text-muted">Opsional, Maks: 6</small>
+						<small class="form-text text-muted">Opsional, Maks: 15</small>
 
 						@error('code')
 							<span class="invalid-feedback">{{ $message }}</span>
@@ -53,6 +53,26 @@
 						@error('year')
 							<span class="invalid-feedback">{{ $message }}</span>
 						@enderror
+					</div>
+					<div class="form-group">
+						<label>Deskripsi</label>
+						<textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Deskripsi">{{ old('description') }}</textarea>
+
+						@error('description')
+							<span class="invalid-feedback">{{ $message }}</span>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label>Sampul</label>
+						<div class="custom-file">
+							<label class="custom-file-label">Unggah</label>
+							<input type="file" class="custom-file-input @error('cover') is-invalid @enderror" name="cover" placeholder="Sampul" value="{{ old('cover') }}" required>
+							
+							@error('cover')
+								<span class="invalid-feedback">{{ $message }}</span>
+							@enderror
+						</div>
+
 					</div>
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">Tambah</button>

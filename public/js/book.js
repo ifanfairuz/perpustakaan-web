@@ -34,6 +34,7 @@ $(function () {
 		modal.find('[name=name]').val(data.name)
 		modal.find('[name=writer]').val(data.writer)
 		modal.find('[name=year]').val(data.year)
+		modal.find('[name=description]').val(data.description)
 		modal.find('[name=category_id]').append(`<option value='${data.category.id}' selected>${data.category.name}</option>`)
 		modal.find('input').removeClass('is-invalid')
 
@@ -67,10 +68,17 @@ $(function () {
 	$('#edit form').submit(function (e) {
 		e.preventDefault()
 
+		let data = new FormData(this)
+		let cover = $('[name=cover]')[0].files[0]
+
+		cover ? data.set('cover', cover) : ''
+
 		$.ajax({
 			url: this.action,
 			type: 'post',
-			data: $(this).serialize(),
+			data: data,
+			contentType: false,
+			processData: false,
 			dataType: 'json',
 			success: res => {
 				let msg = `<div class="alert alert-success alert-dismissible">${res.msg}<button class="close" data-dismiss="alert">&times;</button></div>`
