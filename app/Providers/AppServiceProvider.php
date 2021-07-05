@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         Builder::defaultStringLength(191);
         if (Schema::hasTable('site')) {
             FacadesCache::forever('site', \App\Models\Site::first());
+            sidebar_title();
         }
     }
 }
