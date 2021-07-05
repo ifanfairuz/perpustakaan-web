@@ -4,11 +4,12 @@
 
 @section('content')
 
-<div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+<div class="col-lg-6 d-none d-lg-block bg-login-image" style="{{ 'background-image: url('. asset('privos.jpg') .')' }}"></div>
 <div class="col-lg-6">
 <div class="p-5">
   <div class="text-center">
-    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+    <h1 class="h4 text-gray-900 mb-1">Perpustakaan - PRIVOS</h1>
+    <label class="h6 text-gray-600 mb-4">login untuk memulai session</label>
   </div>
   <form class="user" action="{{ route('login') }}" method="post">
     @csrf

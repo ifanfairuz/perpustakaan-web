@@ -1,3 +1,8 @@
+.sidebar-logo{
+	height: 40px;
+	border-radius: 50%;
+}
+
 .selected{
 	background-color: #f3f3f3;
 }

@@ -3,7 +3,7 @@
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
     <div class="sidebar-brand-icon">
-      <i class="fa fa-university"></i>
+      <img class="sidebar-logo" src="privos.jpg" alt="logo">
     </div>
     <div class="sidebar-brand-text mx-3">{{ site('name') }}</div>
   </a>
