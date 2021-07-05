@@ -33,7 +33,7 @@
 		<div class="col-md-8">
 			<div class="card shadow">
 				<div class="card-header">
-					<h6 class="card-title my-0 font-weight-bold text-primary">History</h6>
+					<h6 class="card-title my-0 font-weight-bold text-primary">Riwayat</h6>
 				</div>
 				<div class="card-body">
 					<div id="alert"></div>
