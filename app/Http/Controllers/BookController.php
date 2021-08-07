@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\MyResponse;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,6 +12,8 @@ use Yajra\Datatables\Datatables;
 
 class BookController extends Controller
 {
+    use MyResponse;
+
     protected $books_path = 'public/books/';
     protected $books_uri = '/storage/books/';
 
@@ -167,6 +170,34 @@ class BookController extends Controller
             ->orWhere('name', 'like', '%'.$code.'%')
             ->latest()->get();
         return $books;
+    }
+
+    public function getSingle(Request $request, $id)
+    {
+        $query = Book::with('category');
+
+        return $this->api_response($query->find($id));
+    }
+
+    // all
+    public function all(Request $request, int $limit = 20)
+    {
+        $request->validate([
+            'category' => 'string|nullable',
+            'keyword' => 'string|nullable'
+        ]);
+
+        $query = Book::with('category');
+        if ($category = $request->category) {
+            $query = $query->whereHas('category', function ($q) use ($category) {
+                $q->where('id', $category);
+            });
+        }
+        if ($keyword = $request->keyword) {
+            $query = $query->where('name', 'like', "%$keyword%");
+        }
+        
+        return $this->pagination_response($request, $query->simplePaginate($limit));
     }
 
     // Get Datatable

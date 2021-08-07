@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 use Yajra\Datatables\Datatables;
 
 class MemberController extends Controller
@@ -54,6 +54,8 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+			'email' => 'required|string|email|max:255|unique:members,email',
+            'password' => 'required|string|min:8|confirmed',
             'name' => 'required|string|max:255|unique:members',
             'phone' => 'required|numeric|digits_between:1,15',
             'gender' => 'required|string',
@@ -98,6 +100,8 @@ class MemberController extends Controller
     public function update(Request $request, Member $member)
     {
         $request->validate([
+            'email' => 'required|string|email|max:255|unique:members,email,'.$member->id,
+            'password' => 'string|min:8|confirmed|nullable',
             'name' => 'required|string|max:255|unique:members,name,'.$member->id,
             'phone' => 'required|numeric|digits_between:1,15',
             'gender' => 'required|string',
@@ -118,7 +122,17 @@ class MemberController extends Controller
             ]);
         }
 
-        $member->update($request->all());
+        if ($request->filled('password')) {
+			$password = Hash::make($request->password);
+
+			$request->merge(['password' => $password]);
+
+			$data = $request->all();
+		} else {
+			$data = $request->only('email', 'name', 'phone', 'gender', 'birthday', 'address');
+		}
+
+        $member->update($data);
 
         return response()->json(['msg' => 'Success Update member']);
     }

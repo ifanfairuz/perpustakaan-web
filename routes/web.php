@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function ()
 	{
 		Route::patch('/return/{loan}', 'LoanController@return')->name('return');
 		Route::patch('/extend/{loan}', 'LoanController@extend')->name('extend');
+		Route::patch('/abort/{loan}', 'LoanController@abort')->name('abort');
+		Route::patch('/taked/{loan}', 'LoanController@taked')->name('taked');
 	});
 
 	Route::prefix('/setting')->name('setting.')->group(function ()

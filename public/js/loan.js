@@ -1,4 +1,42 @@
 $(function () {
+
+	function getStatusFlag(status) {
+		switch (status) {
+			case 0:
+				return 'success';
+
+			case 1:
+				return 'primary';
+
+			case 2:
+				return 'warning';
+
+			case -1:
+				return 'danger';
+					
+			default:
+				return status
+		}
+	}
+
+	function getStatusLabel(status) {
+		switch (status) {
+			case 0:
+				return 'Dikembalikan';
+
+			case 1:
+				return 'Aktif';
+
+			case 2:
+				return 'Belum Diambil';
+
+			case -1:
+				return 'Batal';
+					
+			default:
+				return status
+		}
+	}
 	
 	const table = $('table').DataTable({
 		serverSide: true,
@@ -22,14 +60,16 @@ $(function () {
 			{ data: 'late' },
 			{
 				data: 'status',
-				render: status =>  `<span class="badge badge-${status ? 'primary' : 'success'}">${status ? 'Active' : 'Returned'}</span>`
+				render: status =>  `<span class="badge badge-${getStatusFlag(status)}">${getStatusLabel(status)}</span>`
 			},
 			{
 				render: (data, type, row) => {
 					const btn = `
-						<button class="btn btn-warning btn-sm" data-click="return" title="Return" ${row.status ? '' : 'disabled'}><i class="fa fa-undo"></i></button>
-						<button class="btn btn-info btn-sm" data-click="extend" title="Extend" ${row.status ? '' : 'disabled'}><i class="fa fa-calendar"></i></button>
-						<button class="btn btn-danger btn-sm" data-click="delete" title="Delete"><i class="fa fa-trash"></i></button>
+						${ row.status == 2 ? `<button class="btn btn-danger btn-sm" data-click="taked" title="Diambil" ${row.status == 2 ? '' : 'disabled'}><i class="fa fa-upload"></i></button>` : `` }
+						${ row.status > 0 ? `<button class="btn btn-warning btn-sm" data-click="return" title="Kembali" ${row.status > 0 ? '' : 'disabled'}><i class="fa fa-undo"></i></button>` : `` }
+						${ row.status > 0 ? `<button class="btn btn-info btn-sm" data-click="extend" title="Perpanjang" ${row.status > 0 ? '' : 'disabled'}><i class="fa fa-calendar"></i></button>` : `` }
+						${row.status == 2 ? `<button class="btn btn-danger btn-sm" data-click="abort" title="Batal" ${row.status == 2 ? '' : 'disabled'}><i class="fa fa-times"></i></button>` : ``}
+						<button class="btn btn-danger btn-sm" data-click="delete" title="Hapus"><i class="fa fa-trash"></i></button>
 					`
 
 					return btn
@@ -89,6 +129,46 @@ $(function () {
 		})
 	} 
 
+	const abort = data => {
+		let url = abortUrl.replace(':id', data.id)
+
+		$.ajax({
+			url: url,
+			type: 'post',
+			data: {
+				'_method': 'patch',
+				'_token': csrf
+			},
+			dataType: 'json',
+			success: res => {
+				let msg = `<div class="alert alert-success alert-dismissible">${res.msg}<button class="close" data-dismiss="alert">&times;</button></div>`
+				
+				$('#alert').html(msg)
+				reload()
+			}
+		})
+	}
+	
+	const taked = data => {
+		let url = takedUrl.replace(':id', data.id)
+
+		$.ajax({
+			url: url,
+			type: 'post',
+			data: {
+				'_method': 'patch',
+				'_token': csrf
+			},
+			dataType: 'json',
+			success: res => {
+				let msg = `<div class="alert alert-success alert-dismissible">${res.msg}<button class="close" data-dismiss="alert">&times;</button></div>`
+				
+				$('#alert').html(msg)
+				reload()
+			}
+		})
+	}
+
 	$('tbody').on('click', 'button', function () {
 		const data = table.row($(this).parents('tr')).data()
 		const action = $(this).data('click')
@@ -104,8 +184,18 @@ $(function () {
 
 				break;
 
+			case 'abort':
+				confirm('Batalkan ?') ? abort(data) : ''
+
+				break;
+
+			case 'taked':
+				confirm('Buku sudah diambil ?') ? taked(data) : ''
+
+				break;
+			
 			case 'delete':
-				confirm('Delete ?') ? remove(data) : ''
+				confirm('Hapus ?') ? remove(data) : ''
 		}
 	})
 

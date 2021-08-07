@@ -85,6 +85,36 @@ class LoanController extends Controller
         return response()->json(['msg' => 'Success Delete Loan']);
     }
 
+    // Taked Loan
+    public function taked(Loan $loan)
+    {
+        if ($loan->status != 2) return response()->json(['msg' => 'Status pinjaman invalid.']);
+
+        $loan->update([
+            'status' => 1,
+            'return' => Carbon::now()->addDays(3)->format('Y-m-d')
+        ]);
+
+        return response()->json(['msg' => 'Buku berhasi diambil']);
+    }
+
+    // Abort Loan
+    public function abort(Loan $loan)
+    {
+        $books = $loan->books;
+
+        $books->each(function ($book)
+        {
+            $book->increment('stock', $book->pivot->qty);
+        });
+
+        $loan->update([
+            'status' => -1
+        ]);
+
+        return response()->json(['msg' => 'Success Abort Loan']);
+    }
+
     // Return Loan
     public function return(Loan $loan)
     {

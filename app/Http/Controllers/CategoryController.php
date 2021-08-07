@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\MyResponse;
 use App\Models\Category;
 use Illuminate\Http\Request;
-
+use Illuminate\Pagination\Paginator;
 use Yajra\Datatables\Datatables;
 
 class CategoryController extends Controller
 {
+    use MyResponse;
+
     /**
      * Display a listing of the resource.
      *
@@ -76,6 +79,12 @@ class CategoryController extends Controller
         $name = $request->name;
         $categories = Category::where('name', 'like', '%'.$name.'%')->latest()->get(['id', 'name as text']);
         return $categories;
+    }
+
+    // all
+    public function all(Request $request)
+    {
+        return $this->pagination_response($request, Category::simplePaginate());
     }
 
     // Get Datatable

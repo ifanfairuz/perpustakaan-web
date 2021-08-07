@@ -16,7 +16,7 @@ class CreateLoansTable extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->date('return');
-            $table->boolean('status')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
             
             $table->foreignId('member_id')->constrained()->onDelete('cascade');

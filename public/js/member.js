@@ -10,6 +10,7 @@ $(function () {
 		},
 		columns: [
 			{ data: 'DT_RowIndex' },
+			{ data: 'email' },
 			{ data: 'name' },
 			{ data: 'gender' },
 			{
@@ -29,6 +30,7 @@ $(function () {
 		let action = updateUrl.replace(':id', data.id)
 
 		modal.find('form').attr('action', action)
+		modal.find('[name=email]').val(data.email)
 		modal.find('[name=name]').val(data.name)
 		modal.find('[name=phone]').val(data.phone)
 		modal.find('[name=birthday]').val(data.birthday)

@@ -24,6 +24,10 @@
 						<table class="table table-bordered" width="100%">
 							<tbody>
 								<tr>
+									<th>Email</th>
+									<td>{{ $member->email }}</td>
+								</tr>
+								<tr>
 									<th>Nama</th>
 									<td>{{ $member->name }}</td>
 								</tr>

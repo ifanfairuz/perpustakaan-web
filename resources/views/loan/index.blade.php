@@ -32,6 +32,8 @@
 						<select data-filter="status" class="form-control custom-select">
 							<option value="1">Aktif</option>
 							<option value="0">Kembali</option>
+							<option value="2">Belum Diambil</option>
+							<option value="-1">Batal</option>
 						</select>
 					</div>
 				</div>
@@ -81,6 +83,8 @@
 		let ajaxUrl = "{{ route('loan.index') }}"
 		let returnUrl = "{{ route('loan.return', ':id') }}";
 		let extendUrl = "{{ route('loan.extend', ':id') }}";
+		let abortUrl = "{{ route('loan.abort', ':id') }}"
+		let takedUrl = "{{ route('loan.taked', ':id') }}"
 		let deleteUrl = "{{ route('loan.destroy', ':id') }}"
 		let csrf = "{{ csrf_token() }}"
 	</script>

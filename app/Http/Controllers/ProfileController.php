@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
-
-use Auth;
 
 class ProfileController extends Controller
 {
@@ -15,7 +14,7 @@ class ProfileController extends Controller
 	{
 		$request->validate([
 			'name' => 'required|string|max:255',
-			'email' => 'required|string|email|max:255|unique:users,email,'.Auth::id(),
+			'email' => 'required|string|email|max:255|unique:users,email,'. Auth::id(),
 			'password' => 'string|min:8|confirmed|nullable'
 		]);
 
@@ -29,7 +28,10 @@ class ProfileController extends Controller
 			$data = $request->only('name', 'email');
 		}
 
-		Auth::user()->update($data);
+		$user = Auth::user();
+		if ($user instanceof User) {
+			$user->update($data);
+		}
 
 		return back()->with('success', 'Success Update Profile');
 	}
